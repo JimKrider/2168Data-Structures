@@ -37,7 +37,7 @@ public class InputGraphicMaze2 extends JFrame
 	Scanner in = new Scanner(integers); 
         M   =  in.nextInt(); 
         N   =  in.nextInt(); 
-        L   =  new LinkedList<Node>();   
+        L   =  new LinkedList<>();   
 	C   =  new Intcoll[N*M+1]; 
         int k; 
 	for (k=1; k<=M*N; k++)
