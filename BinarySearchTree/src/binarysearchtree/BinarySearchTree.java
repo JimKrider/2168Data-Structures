@@ -47,7 +47,29 @@ public class BinarySearchTree {
           c = copytree(obj.c);  
       }
     }   
-    
+    public int largerThen(int n){
+      return largerThen(c,n);
+    }
+    private static int largerThen(btNode t,int n){
+        int count = 0;
+        if(t == null){return count;}
+        if(t.info > n)
+        {
+            count++;
+        }
+        return count + largerThen(t.left,n)+largerThen(t.right,n);
+    }
+    public void largerThenOmit(int i){
+        largerThenOmit(c,i);
+    }
+    private void largerThenOmit(btNode t,int i)
+    {      
+        if(t == null){return;}
+        if(t.info >= i){omit(t.info);}
+        largerThenOmit(t.left,i);
+        largerThenOmit(t.right,i);
+        
+    }
     public void insert(int i)
     {
       btNode pred = null, p = c;
@@ -59,7 +81,7 @@ public class BinarySearchTree {
       }
       if (p == null)                    //If the node is null
       {
-         howmany++; p = new btNode(i, null, null);//create a new one
+        howmany++; p = new btNode(i, null, null);//create a new one
         if (pred != null)
         {
             if (pred.info > i) pred.left = p;
@@ -109,9 +131,13 @@ public class BinarySearchTree {
                 while(max.right != null){
                     maxpred = max;
                     max = max.right;
-                }           
+                } 
+                if(max.left != null){
+                    maxpred.right = max.left;
+                }else{
+                    maxpred.right = max.right;
+                }
                 c.info/*<-----*/= max.info;
-                maxpred.right   = max.left;
                 c.right/*<----*/= p.right;
                 c.left/*<-----*/= p.left;
             }else if(predp.info > p.info){
