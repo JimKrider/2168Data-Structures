@@ -7,19 +7,25 @@ package binarysearchtree;
 import java.io.*;
 /**
  *
- * @author Jimbo
+ * @author Jim
  */
 public class BinarySearchTree {
     private int howmany;
     private btNode c;
 
-    
+    /**
+     *
+     */
     public BinarySearchTree()
     {
       c = null;
       howmany = 0;
     } 
     
+    /**
+     *
+     * @param i
+     */
     public BinarySearchTree(int i)
     {
       c = null;
@@ -39,6 +45,10 @@ public class BinarySearchTree {
       return root;
     }   
     
+    /**
+     *
+     * @param obj
+     */
     public void copy(BinarySearchTree obj)
     {
       if (this != obj)
@@ -47,9 +57,16 @@ public class BinarySearchTree {
           c = copytree(obj.c);  
       }
     }   
+
+    /**
+     *
+     * @param n
+     * @return
+     */
     public int largerThen(int n){
       return largerThen(c,n);
     }
+    
     private static int largerThen(btNode t,int n){
         int count = 0;
         if(t == null){return count;}
@@ -59,6 +76,11 @@ public class BinarySearchTree {
         }
         return count + largerThen(t.left,n)+largerThen(t.right,n);
     }
+
+    /**
+     *
+     * @param i
+     */
     public void largerThenOmit(int i){
         largerThenOmit(c,i);
     }
@@ -70,6 +92,11 @@ public class BinarySearchTree {
         largerThenOmit(t.right,i);
         
     }
+
+    /**
+     *
+     * @param i
+     */
     public void insert(int i)
     {
       btNode pred = null, p = c;
@@ -91,6 +118,10 @@ public class BinarySearchTree {
       }
     }   
     
+    /**
+     *
+     * @param i
+     */
     public void omit(int i)
     {
         btNode p = c, predp = null;
@@ -158,6 +189,12 @@ public class BinarySearchTree {
         }//End of Inner If statements 
     }//End of Omit Method   
     
+    /**
+     *
+     * @param i
+     * @return boolean
+     * 
+     */
     public boolean belongs(int i)
     {
         btNode p = c;
@@ -169,8 +206,18 @@ public class BinarySearchTree {
       return (p != null); 
     }//End of Belongs Method   
     
+    /**
+     *
+     * @return
+     */
     public int get_howmany() {return howmany;}//End of get_howmany   
-    /* This print is not used in this program */
+    
+
+    /**
+     *
+     * @param outname
+     */
+    
     public void print(String outname)
     {
       try
@@ -185,12 +232,20 @@ public class BinarySearchTree {
       }
     }//End of print that works with outs
     
+    /**
+     *
+     */
     public void print()
     {
         printtree(c);
         if(c == null){System.out.println(c);}
     }//End of print    
     
+    /**
+     *
+     * @param obj
+     * @return
+     */
     public boolean equals(BinarySearchTree obj)
     {
       int j; boolean result  = (howmany==obj.howmany);
@@ -227,13 +282,13 @@ public class BinarySearchTree {
         printtree(t.left);
         System.out.println(t.info);
         if(t.right != null)
-            System.out.println("Right " + t.right.info);
+            System.out.println("Right is " + t.right.info);
         else
-            System.out.println("Right is null" );
+            System.out.println("Right is null " );  
         if(t.left != null)
-            System.out.println("Left " + t.left.info);
+            System.out.println("Left is " + t.left.info);
         else
-            System.out.println("Left is null" );
+            System.out.println("Left is null " );
         printtree(t.right);
       } 
     }//End of Printtree method   

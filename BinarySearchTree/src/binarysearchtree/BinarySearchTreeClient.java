@@ -9,7 +9,11 @@ import java.io.*;
  */
 public class BinarySearchTreeClient {
  
-   public static void main(String[] args)
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args)
    {
       System.out.println("Enter # of random integers to be generated");
       Scanner blackboard = new Scanner(System.in);
@@ -28,7 +32,7 @@ public class BinarySearchTreeClient {
       System.out.println("The # of integers in BST is "+BST.get_howmany());
       System.out.println("Time in milliseconds "+lapse);
       System.out.println("Time in Seconds "+lapse/1000.00+"\n");
-     // System.out.println("Integers in The BST are "); BST.print();
+      System.out.println("Integers in The BST are "); BST.print();
       //System.out.println("Does this work?  "+ BST.largerThen(10));
       //BST.largerThenOmit(50);
      // System.out.println("Integers in The BST are "); BST.print();
