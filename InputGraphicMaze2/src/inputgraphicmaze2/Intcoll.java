@@ -13,7 +13,9 @@ public class Intcoll {
         c = new LinkedList<>();
         howmany = 0;
     }
-    public Intcoll(int i){
+    
+    public Intcoll(int i)
+    {
         c = new LinkedList();
         howmany = i;
     }
@@ -21,7 +23,8 @@ public class Intcoll {
     public void insert(int i)
     {   Integer I = i;
         if (!c.contains(I)){ c.addFirst(I); }
-    } 
+    }
+    
     public void omit(int i)
     {
         Integer I = i;
@@ -29,7 +32,9 @@ public class Intcoll {
             c.remove(I);
         }
     }
+    
     public int get_howmany(){return c.size();}
+    
     public void copy(Intcoll obj)
     {
         ListIterator<Integer> tmp = obj.c.listIterator();
@@ -40,6 +45,7 @@ public class Intcoll {
             c.add(I);
 	}
     }
+    
     public void print()
     {
         ListIterator<Integer> tmp = c.listIterator();
@@ -48,11 +54,11 @@ public class Intcoll {
             System.out.print(I + " | ");
         }
     }
+    
     public boolean belongs(int i)
     {
         Integer I = i;
         return c.contains(I);
     }
     public boolean equals(Intcoll obj){ return c.equals(obj.c);}
-
 }

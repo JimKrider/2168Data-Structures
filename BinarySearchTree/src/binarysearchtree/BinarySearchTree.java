@@ -10,41 +10,19 @@ import java.io.*;
  * @author Jim
  */
 public class BinarySearchTree {
-
-    /**
-     *
-     */
     private int howmany;
-
-    /**
-     *
-     */
     private btNode c;
-
-    /**
-     *
-     */
     public BinarySearchTree()
     {
       c = null;
       howmany = 0;
-    } 
-    
-    /**
-     *
-     * @param i
-     */
+    }
     public BinarySearchTree(int i)
     {
       c = null;
       howmany = 0;
     }   
     
-    /**
-     *
-     * @param t
-     * @return
-     */
     private static btNode copytree(btNode t)
     {
       btNode root = null;
@@ -58,10 +36,6 @@ public class BinarySearchTree {
       return root;
     }   
     
-    /**
-     *
-     * @param obj
-     */
     public void copy(BinarySearchTree obj)
     {
       if (this != obj)
@@ -69,24 +43,14 @@ public class BinarySearchTree {
           howmany = obj.howmany;
           c = copytree(obj.c);  
       }
-    }   
-
-    /**
-     *
-     * @param n
-     * @return
-     */
+    }
+    
     public int largerThen(int n){
       return largerThen(c,n);
     }
     
-    /**
-     *
-     * @param btNode t
-     * @param n
-     * @return
-     */
-    private static int largerThen(btNode t,int n){
+    private static int largerThen(btNode t,int n)
+    {
         int count = 0;
         if(t == null){return count;}
         if(t.info > n)
@@ -96,19 +60,11 @@ public class BinarySearchTree {
         return count + largerThen(t.left,n)+largerThen(t.right,n);
     }
 
-    /**
-     *
-     * @param i
-     */
-    public void largerThenOmit(int i){
+    public void largerThenOmit(int i)
+    {
         largerThenOmit(c,i);
     }
     
-    /**
-     *
-     * @param btNode
-     * @param i
-     */
     private void largerThenOmit(btNode t,int i)
     {      
         if(t == null){return;}
@@ -118,10 +74,6 @@ public class BinarySearchTree {
         
     }
 
-    /**
-     *
-     * @param i
-     */
     public void insert(int i)
     {
       btNode pred = null, p = c;
@@ -143,10 +95,6 @@ public class BinarySearchTree {
       }
     }   
     
-    /**
-     *
-     * @param i
-     */
     public void omit(int i)
     {
         btNode p = c, predp = null;
@@ -214,12 +162,6 @@ public class BinarySearchTree {
         }//End of Inner If statements 
     }//End of Omit Method   
     
-    /**
-     *
-     * @param i
-     * @return 
-     * 
-     */
     public boolean belongs(int i)
     {
         btNode p = c;
@@ -231,16 +173,8 @@ public class BinarySearchTree {
       return (p != null); 
     }//End of Belongs Method   
     
-    /**
-     *
-     * @return
-     */
     public int get_howmany() {return howmany;}//End of get_howmany   
     
-    /**
-     *
-     * @param outname
-     */
     public void print(String outname)
     {
       try
@@ -255,20 +189,12 @@ public class BinarySearchTree {
       }
     }//End of print that works with outs
     
-    /**
-     *
-     */
     public void print()
     {
         printtree(c);
         if(c == null){System.out.println(c);}
     }//End of print    
     
-    /**
-     *
-     * @param obj
-     * @return
-     */
     public boolean equals(BinarySearchTree obj)
     {
       int j; boolean result  = (howmany==obj.howmany);
@@ -288,11 +214,6 @@ public class BinarySearchTree {
       return result;
     }//End of Equals Method   
     
-    /**
-     *
-     * @param btNode
-     * @param outs
-     */
     private static void printtree(btNode t, PrintWriter outs)
     {   
 	if (t!=null)
@@ -303,10 +224,6 @@ public class BinarySearchTree {
 	}
     }//End of Printtree method for PrintWriter OUTS   
     
-    /**
-     *
-     * @param btNode
-     */
     private static void printtree(btNode t)
     {    
       if(t != null)
@@ -325,13 +242,6 @@ public class BinarySearchTree {
       } 
     }//End of Printtree method   
     
-    /**
-     *
-     * @param btNode
-     * @param a
-     * @param i
-     * @return
-     */
     private static int toarray(btNode t, int[] a, int i)
     {
       int num_nodes = 0;int r=0,l=0;
@@ -344,44 +254,19 @@ public class BinarySearchTree {
       return num_nodes;
     }//End of toarray method
     
-    /**
-     *
-     */
     private static class btNode
     {
-
-        /**
-         *
-         */
-        int info; 
-
-        /**
-         *
-         */
-        btNode left; 
-
-        /**
-         *
-         */
-        btNode right;
-
-        /**
-         *
-         * @param s
-         * @param lt
-         * @param rt
-         */
+        int info; btNode left; btNode right;
+        
         private btNode(int s, btNode lt, btNode rt)
-       {
-        info = s; left = lt;   right = rt;  
+        {
+            info = s; left = lt;   right = rt;  
         }
-
-        /**
-         *
-         */
+        
         private btNode()
-       {
-        info = 0; left = null; right = null;
+        {
+            info = 0; left = null; right = null;
         }
+        
     }//End of Class btNode
 }

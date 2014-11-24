@@ -48,12 +48,9 @@ public class InputGraphicMaze2 extends JFrame
         start = 50;
         delta = 15;              	
         Top    = new Line2D.Double(start+delta, start, start+N*delta, start);
-	Bottom = new Line2D.Double(start, start+M*delta,start+(N-1)*delta, 
-         	start+M*delta);
-	Left   = new Line2D.Double(start, start, start, 
-		start+M*delta);
-	Right  = new Line2D.Double(start+N*delta, start, start+N*delta, 
-		start+M*delta);
+	Bottom = new Line2D.Double(start, start+M*delta,start+(N-1)*delta,start+M*delta);
+	Left   = new Line2D.Double(start, start, start, start+M*delta);
+	Right  = new Line2D.Double(start+N*delta, start,start+N*delta, start+M*delta);
         int i = 0, j = 0;
         int size = M*(N-1)+(M-1)*N+1;  
         //Add all internal lines
@@ -84,8 +81,7 @@ public class InputGraphicMaze2 extends JFrame
                 j = k-(i-1)*(N-1);
                 cell1 = (i-1)*N+j;
                 cell2 = cell1+1;
-            }
-            else 
+            }else 
             {
                 int K = k-D;  
                 i = (K-1)/N+1;
@@ -273,20 +269,20 @@ public class InputGraphicMaze2 extends JFrame
         }
     }/*End Of MazePanel*/
 
-    public static void main(String args[]) 
-    {new InputGraphicMaze2();}
+  /*  public static void main(String args[]) 
+    {new InputGraphicMaze2();}*/
 	
     public int Rows() {return M;}
     public int Cols() {return N;}
     public boolean can_go(int i, int j, char c)
     {
-       int D = M*(N-1); 
-       boolean result=false;
-       int K = N*(M-1)+(N-1)*M; 
-       if (c == 'U') result =! status[D+(i-2)*N+j];
-       if (c == 'R') result =! status[(i-1)*(N-1)+j];
-       if (c == 'D') result =! status[D+(i-1)*N+j];
-       if (c == 'L') result =! status[(i-1)*(N-1)+j-1];
+       int D = M *(N-1);/* D connects node M and N-1 */ 
+       boolean result = false;
+       //int K = N*(M-1)+(N-1)*M; 
+       if (c == 'U') result =! status[D + (i-2) * N + j];
+       if (c == 'R') result =! status[(i-1) * (N-1) + j];
+       if (c == 'D') result =! status[D + (i-1) * N + j];
+       if (c == 'L') result =! status[(i-1) * (N-1) + j-1];
        return result;
     }
 
@@ -308,13 +304,13 @@ public class InputGraphicMaze2 extends JFrame
 
     private class Node 
     {
-        private Point p; private Color c;
+        private Point p;
+        private Color c;
         public Node(int X, int Y, Color color)
         {
            p = new Point(X, Y); 
            c = color;
         }
     }/*End of Node Class*/
-
 } //end of class
 
