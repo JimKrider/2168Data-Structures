@@ -10,7 +10,15 @@ import java.io.*;
  * @author Jim
  */
 public class BinarySearchTree {
+
+    /**
+     *
+     */
     private int howmany;
+
+    /**
+     *
+     */
     private btNode c;
 
     /**
@@ -32,6 +40,11 @@ public class BinarySearchTree {
       howmany = 0;
     }   
     
+    /**
+     *
+     * @param t
+     * @return
+     */
     private static btNode copytree(btNode t)
     {
       btNode root = null;
@@ -67,6 +80,12 @@ public class BinarySearchTree {
       return largerThen(c,n);
     }
     
+    /**
+     *
+     * @param btNode t
+     * @param n
+     * @return
+     */
     private static int largerThen(btNode t,int n){
         int count = 0;
         if(t == null){return count;}
@@ -85,6 +104,11 @@ public class BinarySearchTree {
         largerThenOmit(c,i);
     }
     
+    /**
+     *
+     * @param btNode
+     * @param i
+     */
     private void largerThenOmit(btNode t,int i)
     {      
         if(t == null){return;}
@@ -264,6 +288,11 @@ public class BinarySearchTree {
       return result;
     }//End of Equals Method   
     
+    /**
+     *
+     * @param btNode
+     * @param outs
+     */
     private static void printtree(btNode t, PrintWriter outs)
     {   
 	if (t!=null)
@@ -274,6 +303,10 @@ public class BinarySearchTree {
 	}
     }//End of Printtree method for PrintWriter OUTS   
     
+    /**
+     *
+     * @param btNode
+     */
     private static void printtree(btNode t)
     {    
       if(t != null)
@@ -292,6 +325,13 @@ public class BinarySearchTree {
       } 
     }//End of Printtree method   
     
+    /**
+     *
+     * @param btNode
+     * @param a
+     * @param i
+     * @return
+     */
     private static int toarray(btNode t, int[] a, int i)
     {
       int num_nodes = 0;int r=0,l=0;
@@ -304,16 +344,42 @@ public class BinarySearchTree {
       return num_nodes;
     }//End of toarray method
     
+    /**
+     *
+     */
     private static class btNode
     {
-       int info; btNode left; btNode right;
 
-       private btNode(int s, btNode lt, btNode rt)
+        /**
+         *
+         */
+        int info; 
+
+        /**
+         *
+         */
+        btNode left; 
+
+        /**
+         *
+         */
+        btNode right;
+
+        /**
+         *
+         * @param s
+         * @param lt
+         * @param rt
+         */
+        private btNode(int s, btNode lt, btNode rt)
        {
         info = s; left = lt;   right = rt;  
         }
 
-       private btNode()
+        /**
+         *
+         */
+        private btNode()
        {
         info = 0; left = null; right = null;
         }
