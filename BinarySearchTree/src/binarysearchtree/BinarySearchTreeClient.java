@@ -33,9 +33,9 @@ public class BinarySearchTreeClient {
       System.out.println("Time in milliseconds "+lapse);
       System.out.println("Time in Seconds "+lapse/1000.00+"\n");
       System.out.println("Integers in The BST are "); BST.print();
-      //System.out.println("Does this work?  "+ BST.largerThen(10));
-      //BST.largerThenOmit(50);
-     // System.out.println("Integers in The BST are "); BST.print();
+      System.out.println("Does this work?  "+ BST.largerThen(10));
+      BST.largerThenOmit(50);
+      System.out.println("Integers in The BST are "); BST.print();
    }
 }
 

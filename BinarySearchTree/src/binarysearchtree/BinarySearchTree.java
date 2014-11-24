@@ -84,6 +84,7 @@ public class BinarySearchTree {
     public void largerThenOmit(int i){
         largerThenOmit(c,i);
     }
+    
     private void largerThenOmit(btNode t,int i)
     {      
         if(t == null){return;}
@@ -192,7 +193,7 @@ public class BinarySearchTree {
     /**
      *
      * @param i
-     * @return boolean
+     * @return 
      * 
      */
     public boolean belongs(int i)
@@ -212,12 +213,10 @@ public class BinarySearchTree {
      */
     public int get_howmany() {return howmany;}//End of get_howmany   
     
-
     /**
      *
      * @param outname
      */
-    
     public void print(String outname)
     {
       try
@@ -319,6 +318,4 @@ public class BinarySearchTree {
         info = 0; left = null; right = null;
         }
     }//End of Class btNode
-   
-    
 }
