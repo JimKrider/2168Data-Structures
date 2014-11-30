@@ -51,40 +51,58 @@ public class YourMazeWithPath2 {
      //   createPathBFS(maze, 1, 1, R, C, Path);/*<----- For BFS */
         CreatePathDFS(mazeD, 1, 1, Dr, Dc, PathD);
         // show the path in the maze
-        maze.showPath(Path);
+          maze.showPath(PathD);
     }
 
     // Creates the path through maze, starting at cell (srow, scol)
     // and ending at cell (erow and ecol),  in L
     public boolean CreatePathDFS(InputGraphicMaze2 maze, int srow, int scol, int erow, int ecol, LinkedList<Point> L)
     {
-        boolean done = false;
-        /*srow and scol, are starting row and col*/
+        boolean done = false;  
         int r = srow, c = scol; 
-        int size  = R * C + 1;/* Sets the size from the Row and Column */
-        Point[] P = new Point[size];/* this is used to store the Nodes */
-        visited[srow][scol] = true; /*sets srow and scoll in V to 1 marking it */
-        int scell = (srow-1) * C + scol;/* starting row * column size + starting column this equals 1, usually*/
-        P[scell]  = new Point(0, 0); /*From Node class in InputGraphic */
-        Point u   = new Point(r, c); /*From Node class in InputGraphic */
-       
-        while (!visited[r][c])
-        {  
-           r = (int) u.getX();
-           c = (int) u.getY();
-           P[scell+1]= u ;
-           CreatePathDFS(maze,r,c,erow,ecol,L);
+        int size  = R * C + 1; 
+        visited[srow][scol] = true;
+        
+        Point[] P = new Point[size];
+        int scell = (srow-1) * C + scol;
+        //P[scell]  = new Point(0, 0);
+        
+        Point u   = new Point(r, c); 
+      
+        System.out.println(u);
+       //if((r>R)&&(c>C)) done = false;
+       if((r == erow)&&( c == ecol)) done = true;
+       visited[r][c] = true;
+       System.out.println(u);
+       if ((r > 1)&&(visited[r-1][c] != true)&&(maze.can_go(r, c,'U'))){
+            if(CreatePathDFS(maze,r-1,c,erow,ecol,L))done = true;
+       }
+       if((c < C)&&(visited[r][c+1] == false)&&(maze.can_go(r, c,'R'))){
+            System.out.println(u);
+           if(CreatePathDFS(maze,r,c+1,erow,ecol,L)==true)done = true;
+       }
+       if ((r < R)&&(visited[r+1][c] != true)&&(maze.can_go(r, c, 'D'))){
+            System.out.println(u);
+           if(CreatePathDFS(maze,r+1,c,erow,ecol,L)==true)done = true;
+       }
+       if ((c > 1)&&(visited[r][c-1] != true)&&(maze.can_go(r, c, 'L'))){
+            System.out.println(u);
+           if(CreatePathDFS(maze,r,c-1,erow,ecol,L)==true)done = true;
            
-        } //end of while
-        while (!u.equals(P[scell])) /* this loops through u till it is 0,0 */
+       }
+       System.out.println(u);
+       //visited[r][c]=false;
+       while ((done==true)&&(!u.equals(P[scell]))) /* this loops through u till it is 0,0 */
         {         
+           System.out.println("HELLO?");
            r = (int) u.getX();
            c = (int) u.getY();
            L.add(u);
            u = P[(r-1) * C + c];/*starts at the the END and increments through the points at U*/ 
         }
-        
-        return done;
+      
+       
+       return done;
     }
 
     public boolean createPathBFS(InputGraphicMaze2 maze, int srow, int scol, int erow, int ecol, LinkedList<Point> L)
@@ -97,7 +115,7 @@ public class YourMazeWithPath2 {
       
         V[srow][scol] = 1; /*sets srow and scoll in V to 1 marking it */
         int scell = (srow-1) * C + scol;/* starting row * column size + starting column this equals 1, usually*/
-        P[scell]  = new Point(0, 0); /*From Node class in InputGraphic */
+        P[scell]  = new Point(0, 0); /*Sets P to 0 0 */
         Point u   = new Point(r, c); /*From Node class in InputGraphic */
         LinkedList<Point> Q = new LinkedList<>();
         Q.add(u); /* adds u to the Q or linked list*/
@@ -106,7 +124,7 @@ public class YourMazeWithPath2 {
            u = Q.remove();/*this removes u while it is in the loop of the level. */
            r = (int) u.getX();/*r is now u's X cord*/
            c = (int) u.getY();/*c is now u's Y cord*/
-           if ((r == erow)&&(c == ecol)) done = true; /*if r and c are at the end row and Column this loop is done*/
+           if ((r == erow)&&(c == ecol)) done = true; /*if r and c are at the end row and Column made it to the end*/
            else
             {  
                 if ((r > 1)&&(V[r-1][c] != 1)&&(maze.can_go(r, c,'U')))/*is Row is larger then 1 and the spot has not been marked, and can go up*/
