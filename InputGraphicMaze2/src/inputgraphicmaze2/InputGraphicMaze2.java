@@ -272,8 +272,8 @@ public class InputGraphicMaze2 extends JFrame
   /*  public static void main(String args[]) 
     {new InputGraphicMaze2();}*/
 	
-    public int Rows() {return M;}
-    public int Cols() {return N;}
+    public int Rows() {return M;}/*M = vert */
+    public int Cols() {return N;}/*N = edge */
     public boolean can_go(int i, int j, char c)
     {
        int D = M *(N-1);/* D connects node M and N-1 */ 

@@ -14,82 +14,120 @@ import java.util.LinkedList;
 public class YourMazeWithPath2 {
    
     private InputGraphicMaze2 maze;
+    private InputGraphicMaze2 mazeD;
     private int R, C; 
+    private int Dr, Dc;
    /* YOU'LL NEED TO ADD MORE CODE HERE!!!!!!! */
     private int[][] V;
+    private int[][] Dfs;
+    private boolean[][] visited; 
     
     public YourMazeWithPath2() 
     {       
         // an R rows x C columns maze
-        maze = new InputGraphicMaze2();
+      /*  maze = new InputGraphicMaze2();
         R = maze.Rows();
         C = maze.Cols();  
-        V = new int[R+1][C+1];/*<-----For BFS */
-        for (int i=1; i<=R; i++){/*<----- For BFS */
-            for (int j=1; j<=C; j++){/*<----- For BFS */
-                 V[i][j]=0;/*<----- For BFS */
+        V = new int[R+1][C+1];/*<-----For BFS 
+        for (int i=1; i<=R; i++){/*<----- For BFS 
+            for (int j=1; j<=C; j++){/*<----- For BFS 
+                 V[i][j]=0;<----- For BFS 
+            }
+        }*/
+        mazeD = new InputGraphicMaze2();
+        Dr = mazeD.Rows();
+        Dc = mazeD.Cols();
+        visited = new boolean[Dr+1][Dc+1];
+        for (int i=1; i<=Dr; i++){/*<----- For DFS */
+            for (int j=1; j<=Dc; j++){/*<----- For DFS */
+                visited[i][j]=false;/*<----- For DFS */
             }
         }
         /* YOU'LL NEED TO ADD MORE CODE HERE!!!!!!!*/
         // Path holds the cells of the path
         LinkedList<Point> Path = new LinkedList<>();
+        LinkedList<Point> PathD = new LinkedList<>();
         // Create the path
-        createPathBFS(maze, 1, 1, R, C, Path);/*<----- For BFS */
+     //   createPathBFS(maze, 1, 1, R, C, Path);/*<----- For BFS */
+        CreatePathDFS(mazeD, 1, 1, Dr, Dc, PathD);
         // show the path in the maze
         maze.showPath(Path);
     }
 
     // Creates the path through maze, starting at cell (srow, scol)
     // and ending at cell (erow and ecol),  in L
-   /* public boolean CreatePathDFS(InputGraphicMaze2 maze,      
-      int srow, int scol, int erow, int ecol, LinkedList<Point> L)
+    public boolean CreatePathDFS(InputGraphicMaze2 maze, int srow, int scol, int erow, int ecol, LinkedList<Point> L)
     {
-         /* YOUR CODE FOR THE PATH GENERATION GOES HERE!!!!!!!
-        
-    }*/
-
-    public boolean createPathBFS(InputGraphicMaze2 maze,      
-      int srow, int scol, int erow, int ecol, LinkedList<Point> L)
-    {
-        int r = srow,    c = scol, 
-        R = maze.Rows(), C = maze.Cols(); 
-        int size  = R*C+1;/* Sets the size to the size of the graph, or Matrix*/
+        boolean done = false;
+        /*srow and scol, are starting row and col*/
+        int r = srow, c = scol; 
+        int size  = R * C + 1;/* Sets the size from the Row and Column */
         Point[] P = new Point[size];/* this is used to store the Nodes */
-        boolean done  = false; 
-        V[srow][scol] = 1; 
-        int scell = (srow-1) * C + scol;
-        int cell;
+        visited[srow][scol] = true; /*sets srow and scoll in V to 1 marking it */
+        int scell = (srow-1) * C + scol;/* starting row * column size + starting column this equals 1, usually*/
+        P[scell]  = new Point(0, 0); /*From Node class in InputGraphic */
+        Point u   = new Point(r, c); /*From Node class in InputGraphic */
+       
+        while (!visited[r][c])
+        {  
+           r = (int) u.getX();
+           c = (int) u.getY();
+           P[scell+1]= u ;
+           CreatePathDFS(maze,r,c,erow,ecol,L);
+           
+        } //end of while
+        while (!u.equals(P[scell])) /* this loops through u till it is 0,0 */
+        {         
+           r = (int) u.getX();
+           c = (int) u.getY();
+           L.add(u);
+           u = P[(r-1) * C + c];/*starts at the the END and increments through the points at U*/ 
+        }
+        
+        return done;
+    }
+
+    public boolean createPathBFS(InputGraphicMaze2 maze, int srow, int scol, int erow, int ecol, LinkedList<Point> L)
+    {
+        boolean done  = false; /*Done is used for Return statement*/
+        /*srow and scol, are starting row and col*/
+        int r = srow, c = scol; 
+        int size  = R * C + 1;/* Sets the size from the Row and Column */
+        Point[] P = new Point[size];/* this is used to store the Nodes */
+      
+        V[srow][scol] = 1; /*sets srow and scoll in V to 1 marking it */
+        int scell = (srow-1) * C + scol;/* starting row * column size + starting column this equals 1, usually*/
         P[scell]  = new Point(0, 0); /*From Node class in InputGraphic */
         Point u   = new Point(r, c); /*From Node class in InputGraphic */
         LinkedList<Point> Q = new LinkedList<>();
-        Q.add(u);
+        Q.add(u); /* adds u to the Q or linked list*/
         while (!done)
         {             
-           u = Q.remove();
-           r = (int) u.getX();
-           c = (int) u.getY(); /* r and c get the X and Y coordinates */
-           if ((r==erow)&&(c==ecol)) done=true; /*Checks the r and c to see if they are equal to the edge eROW or the eCOlUMN*/
+           u = Q.remove();/*this removes u while it is in the loop of the level. */
+           r = (int) u.getX();/*r is now u's X cord*/
+           c = (int) u.getY();/*c is now u's Y cord*/
+           if ((r == erow)&&(c == ecol)) done = true; /*if r and c are at the end row and Column this loop is done*/
            else
             {  
-                if ((r>1)&&(V[r-1][c]!=1)&&(maze.can_go(r, c,'U')))/*checks to see if it can go UP*/
+                if ((r > 1)&&(V[r-1][c] != 1)&&(maze.can_go(r, c,'U')))/*is Row is larger then 1 and the spot has not been marked, and can go up*/
                 {
-                    V[r-1][c]    = 1;/* there is an Edge from V.r-1 to V.c */
-                    P[(r-2)*C+c] = u;
-                    Q.add(new Point(r-1, c));/* adds r-1 and c to Q which is the linked list, and addes that point to the visited list*/
+                    V[r-1][c]       = 1;/* there is an Edge from V.r-1 to V.c */
+                    P[(r-2)* C + c] = u;/*Column + c.*/
+                    Q.add(new Point(r-1, c));/* This adds the next point to the Q linked list. Which is the breadth first search it goes across the level*/
                 }
-                if ((c<C)&&(V[r][c+1]!=1)&&(maze.can_go(r, c,'R')))/*checks to see if it can go RIGHT*/
+                if ((c < C)&&(V[r][c+1] != 1)&&(maze.can_go(r, c,'R')))/*If c is not larger then the COLUMN max*/
                 {
                     V[r][c+1]      = 1;
                     P[(r-1)*C+c+1] = u;
                     Q.add(new Point(r, c+1));/*c+1 means that it moves to the right by 1 */
                 }
-                if ((r<R)&&(V[r+1][c]!=1)&&(maze.can_go(r, c, 'D')))/*checks to see if it can go DOWN*/
+                if ((r < R)&&(V[r+1][c] != 1)&&(maze.can_go(r, c, 'D')))/*If r is not larger then ROW max*/
                 {
                     V[r+1][c] = 1;
                     P[r*C+c]  = u;
                     Q.add(new Point(r+1, c));/* r+1 means that it either goes down by one or the right */
                 }              
-                if ((c>1)&&(V[r][c-1]!=1)&&(maze.can_go(r, c, 'L')))/*checks to see if it can go LEFT*/             
+                if ((c > 1)&&(V[r][c-1] != 1)&&(maze.can_go(r, c, 'L')))/*If c is larger then 1*/             
                 {
                     V[r][c-1]      = 1;
                     P[(r-1)*C+c-1] = u;
@@ -97,12 +135,12 @@ public class YourMazeWithPath2 {
                 }
             }           
         } //end of while
-        while (!u.equals(P[scell])) 
+        while (!u.equals(P[scell])) /* this loops through u till it is 0,0 */
         {         
            r = (int) u.getX();
            c = (int) u.getY();
            L.add(u);
-           u = P[(r-1)*C+c]; 
+           u = P[(r-1) * C + c];/*starts at the the END and increments through the points at U*/ 
         }
         return done;
     }
