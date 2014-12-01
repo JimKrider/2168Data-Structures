@@ -240,15 +240,12 @@ public class InputGraphicMaze2 extends JFrame
             {
                 L.clear(); 
                 graph.setPaint(Color.green);  
-                Iterator I = Path.iterator();
-                while (I.hasNext())
-                {
-                    Point p = (Point) I.next(); 
-                    i = (int) p.getX();
-                    j = (int) p.getY();
-                    graph.fillRect(start+(j-1)*delta+1, 
-		    start+(i-1)*delta+1, delta-2, delta-2);
-                }
+               for (Point p : Path) {
+                   i = (int) p.getX();
+                   j = (int) p.getY();
+                   graph.fillRect(start+(j-1)*delta+1,
+                           start+(i-1)*delta+1, delta-2, delta-2);
+               }
             }
             else
             {
@@ -269,8 +266,9 @@ public class InputGraphicMaze2 extends JFrame
         }
     }/*End Of MazePanel*/
 
-  /*  public static void main(String args[]) 
-    {new InputGraphicMaze2();}*/
+    public static void main(String args[]) 
+    {InputGraphicMaze2 inputGraphicMaze2 = new InputGraphicMaze2();
+}
 	
     public int Rows() {return M;}/*M = vert */
     public int Cols() {return N;}/*N = edge */
@@ -278,7 +276,7 @@ public class InputGraphicMaze2 extends JFrame
     {
        int D = M *(N-1);/* D connects node M and N-1 */ 
        boolean result = false;
-       //int K = N*(M-1)+(N-1)*M; 
+       int K = N*(M-1)+(N-1)*M; 
        if (c == 'U') result =! status[D + (i-2) * N + j];
        if (c == 'R') result =! status[(i-1) * (N-1) + j];
        if (c == 'D') result =! status[D + (i-1) * N + j];

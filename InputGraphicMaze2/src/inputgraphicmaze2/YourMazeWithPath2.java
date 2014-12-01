@@ -26,71 +26,74 @@ public class YourMazeWithPath2 {
     {       
         // an R rows x C columns maze
        // maze = new InputGraphicMaze2();
-         mazeD = new InputGraphicMaze2();
-        Dr = mazeD.Rows();
+        mazeD = new InputGraphicMaze2();
+       /* Dr = mazeD.Rows();
         Dc = mazeD.Cols();  
-        V = new int[Dr+1][Dc+1];/*<-----For BFS */
-        for (int i=1; i<=Dr; i++){/*<----- For BFS*/ 
-            for (int j=1; j<=Dc; j++){/*<----- For BFS*/ 
-                 V[i][j]=0;/*<----- For BFS */
+       /*<-----For BFS 
+        for (int i=1; i<=Dr; i++){/*<----- For BFS 
+            for (int j=1; j<=Dc; j++){/*<----- For BFS 
+                 V[i][j]=0;/*<----- For BFS 
             }
-        }
+        }*/
        
         Dr = mazeD.Rows();
         Dc = mazeD.Cols();
+       // V = new int[Dr+1][Dc+1];
         visited = new boolean[Dr+1][Dc+1];
         for (int i=1; i<=Dr; i++){/*<----- For DFS */
             for (int j=1; j<=Dc; j++){/*<----- For DFS */
+                
                 visited[i][j]=false;/*<----- For DFS */
             }
         }
         /* YOU'LL NEED TO ADD MORE CODE HERE!!!!!!!*/
         // Path holds the cells of the path
-        LinkedList<Point> Path = new LinkedList<>();
+      //  LinkedList<Point> Path = new LinkedList<>();
         LinkedList<Point> PathD = new LinkedList<>();
         // Create the path
      //   createPathBFS(maze, 1, 1, R, C, Path);/*<----- For BFS */
-        CreatePathDFS(mazeD, 1, 1, 2, 2, PathD);
+        CreatePathDFS(mazeD, 1, 1, Dr, Dc, PathD);
         // show the path in the maze
-          maze.showPath(PathD);
+          mazeD.showPath(PathD);
     }
 
     // Creates the path through maze, starting at cell (srow, scol)
     // and ending at cell (erow and ecol),  in L
     public boolean CreatePathDFS(InputGraphicMaze2 maze, int srow, int scol, int erow, int ecol, LinkedList<Point> L)
     {
-        boolean done = true;  
-        int r = srow, c = scol; 
-        int size  = R * C + 1; 
-        //visited[srow][scol] = true;
-        /*
-        Point[] P = new Point[size];
-        int scell = (srow-1) * C + scol;
-        //P[scell]  = new Point(0, 0);
-        
-        Point u   = new Point(r, c); 
-      */
+        boolean done = true; int r = srow, c = scol; 
+       visited[srow][scol] = true;
+          
+       while(!done){
        
-       if((r>R)&&(c>C)) done = false;
-       if((r == erow)&&( c == ecol)){
-           System.out.println("FOUND IT"+ V[erow][ecol]);
-           done = true;
-        }
-       visited[r][c] = true;
-       if ((r > 1)&&(maze.can_go(r, c,'U'))){
-            if(CreatePathDFS(maze,r-1,c,erow,ecol,L)==true)done = true;
+       if((r == erow)&&( c == ecol)){done = true;}
+       else{
+       
+       if ((r > 1)&&(visited[r-1][c] != true)&&(maze.can_go(r, c,'U'))){
+           visited[r-1][c] = true;
+           L.add(new Point(r-1,c));
+           CreatePathDFS(maze,r-1,c,erow,ecol,L);
        }
-       if((c < C)&&(maze.can_go(r, c,'R'))){  
-            if(CreatePathDFS(maze,r,c+1,erow,ecol,L)==true)done = true;
+       if((c < C)&&(visited[r][c+1] != true)&&(maze.can_go(r, c,'R'))){  
+           visited[r][c+1] = true; 
+           L.add(new Point(r,c+1));
+           CreatePathDFS(maze,r,c+1,erow,ecol,L);
        }
-       if((r < R)&&(maze.can_go(r, c, 'D'))){
-            if(CreatePathDFS(maze,r+1,c,erow,ecol,L)==true)done = true;
+       if((r < R)&&(visited[r+1][c] != true)&&(maze.can_go(r, c, 'D'))){
+           visited[r+1][c] = true; 
+           L.add(new Point(r+1,c));
+           CreatePathDFS(maze,r+1,c,erow,ecol,L);
        }
-       if((c > 1)&&(maze.can_go(r, c, 'L'))){
-            if(CreatePathDFS(maze,r,c-1,erow,ecol,L)==true)done = true;
+       if((c > 1)&&(visited[r][c-1] != true)&&(maze.can_go(r, c, 'L'))){
+           visited[r][c-1] = true; 
+           L.add(new Point(r,c-1));
+           CreatePathDFS(maze,r,c-1,erow,ecol,L);
+       }
+       // visited[r][c] = false;
+       }
        }
        
-        visited[r][c] = false;
+       
         return done;
     }
 
@@ -154,7 +157,7 @@ public class YourMazeWithPath2 {
      
      
     public static void main(String[] args){
-        new YourMazeWithPath2();
+        YourMazeWithPath2 yourMazeWithPath2 = new YourMazeWithPath2();
     }
     
 }
