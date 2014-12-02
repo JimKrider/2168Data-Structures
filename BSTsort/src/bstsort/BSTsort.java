@@ -12,9 +12,9 @@ import java.util.Random;
  * @author Jim
  */
 public class BSTsort {
-    public int howmany;
+    private int howmany;
     private btNode c;
-
+    private static int toArray=0;
     /**
      * @param args the command line arguments
      */
@@ -22,10 +22,12 @@ public class BSTsort {
         // TODO code application logic here
         
         
-        /* This is for the ARRAY TO BINARY TREE */
+        /* This is for the ARRAY TO BINARY TREE 
+        
+        */
         BSTsort arrayTest   = new BSTsort();
         Random gen  = new Random();
-        int[] a     = new int[10];int i; 
+        int[]  a    = new int[10];int i; 
         for (i=0; i<a.length; i++){ a[i]=gen.nextInt(20)+1; }/*<--Random Num Gen Not SO random */
         quicksort(a,0,a.length-1);/*<-------------Had to sort it, was bothering me*/
         System.out.print("Sorted Array --> ");
@@ -35,19 +37,27 @@ public class BSTsort {
         System.out.println("The Array In a Binary Tree --> ");
         arrayTest.print();
         /*End of The ARRAY TO BINARY TREE TEST*/
+        
+        
         /*Binary Tree to Array Then Back to Tree Sorted*/
         System.out.println("\nThe Binary Tree ---> ");
         BSTsort btNodeTest  = new BSTsort();
         Random BSTgen = new Random(); 
-        int[] numb = {5,10,9,3,2,7,8,1,4};
-        for (i=0; i<numb.length; i++){btNodeTest.insert(numb[i]);}
+        /*Random generated numbers inserted into the tree*/
+        for (i=0; i<10; i++){btNodeTest.insert(BSTgen.nextInt(20)+1);}
         btNodeTest.print();
-        int[] btNodeArray = new int[btNodeTest.howmany];
-        
+        int size = btNodeTest.count();
+        System.out.println("\n--> "+size);
+        /*Create an array based on the number of nodes*/
+        int[] btNodeArray = new int[size];
         btNodeTest.btsToArray(btNodeArray,0);
         for(i=0;i<btNodeArray.length;i++){System.out.print(btNodeArray[i]+" ");}
-        System.out.println();
-        
+        System.out.println("\n");
+        /*I then created another new BINARY TREE and turned the array back into 
+        a binary tree now which became a binary search tree*/
+        BSTsort newBtnode = new BSTsort();
+        newBtnode.arrayBTSort(btNodeArray,0, btNodeArray.length-1 );
+        newBtnode.print();
     }
     public BSTsort(){
       c = null;
@@ -81,17 +91,17 @@ public class BSTsort {
       } 
     }   
     public void arrayBTSort(int[] a,int start, int end)
-    {
-        
-        c = sortedArrayToBST(a,start,end);//sets this.c to the sorted tree
-      
+    { 
+        c = sortedArrayToBST(a,start,end); 
     }
-    public void btSort(int start, int end){
+    
+    public void binaryTreeSort(int start, int end)
+    {
         int[] sort = new int[howmany];
-        toarray(this.c,sort,howmany);
-        
+        toarray(this.c,sort);
         c = sortedArrayToBST(sort,start,end);
     }
+    /*Takes an Array and turns it into a binary tree*/
     private btNode sortedArrayToBST(int[] a, int start, int end)
     {
         if(start > end)
@@ -102,17 +112,29 @@ public class BSTsort {
         root.right    = sortedArrayToBST(a,mid+1,end);
         return root;
     }
-    public void btsToArray(int[] a, int i){
-        toarray(this.c,a,i);
+    
+    /*Returns the NUMBER OF NODES IN the TREE*/
+    public int count()
+    { 
+        return countNode(this.c);   
     }
-    private static void toarray(btNode t, int[] a, int i)
+    private static int countNode(btNode t)
+    {
+        if(t == null){return 0;}
+        return 1 + countNode(t.left)+countNode(t.right);
+    }
+    
+    /*Turns a Binary Search Tree Into an ARRAY*/
+    public void btsToArray(int[] a, int i)
+    { 
+        toarray(this.c,a); 
+    }
+    private static void toarray(btNode t, int[] a)
     {   
         if(t==null){return;}
-        toarray(t.left, a, i*2);
-        a[i] = t.info; 
-        toarray(t.right, a, i+1);
-        
-        
+        toarray(t.left, a);
+        a[toArray++] = t.info; 
+        toarray(t.right, a);
     }//End of toarray method
     
     
@@ -167,6 +189,8 @@ public class BSTsort {
         else c = p;
       }
     }   
+    
+    
     private static class btNode
     {
        int info; btNode left; btNode right;
@@ -174,12 +198,12 @@ public class BSTsort {
        private btNode(int s, btNode lt, btNode rt)
        {
         info = s; left = lt;   right = rt;  
-        }
+       }
 
        private btNode()
        {
         info = 0; left = null; right = null;
-        }
+       }
     }//End of Class btNode
     
 }
