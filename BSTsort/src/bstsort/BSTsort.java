@@ -40,7 +40,7 @@ public class BSTsort {
         BSTsort btNodeTest  = new BSTsort();
         Random BSTgen = new Random(); 
         int[] numb = {5,10,9,3,2,7,8,1,4};
-        for (i=0; i<9; i++){btNodeTest.insert(numb[i]);}
+        for (i=0; i<numb.length; i++){btNodeTest.insert(numb[i]);}
         btNodeTest.print();
         int[] btNodeArray = new int[btNodeTest.howmany];
         
@@ -108,9 +108,11 @@ public class BSTsort {
     private static void toarray(btNode t, int[] a, int i)
     {   
         if(t==null){return;}
-        toarray(t.left, a, i);
-        a[i++] = t.info; 
+        toarray(t.left, a, i*2);
+        a[i] = t.info; 
         toarray(t.right, a, i+1);
+        
+        
     }//End of toarray method
     
     
