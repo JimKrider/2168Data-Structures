@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Jim
  */
 public class BSTsort {
-    private int howmany;
+    public int howmany;
     private btNode c;
 
     /**
@@ -39,15 +39,13 @@ public class BSTsort {
         System.out.println("\nThe Binary Tree ---> ");
         BSTsort btNodeTest  = new BSTsort();
         Random BSTgen = new Random(); 
-        for (i=0; i<10; i++){
-        int num =BSTgen.nextInt(10)+1; 
-        btNodeTest.insert(num);
-        }
+        int[] numb = {5,10,9,3,2,7,8,1,4};
+        for (i=0; i<9; i++){btNodeTest.insert(numb[i]);}
         btNodeTest.print();
-        int[] btNodeArray=null;
-       
-        btNodeTest.btsToArray(btNodeArray,btNodeTest.get_howmany());
-        for(i=0;i<btNodeArray.length-1;i++){System.out.print(btNodeArray[i]+" ");}
+        int[] btNodeArray = new int[btNodeTest.howmany];
+        
+        btNodeTest.btsToArray(btNodeArray,0);
+        for(i=0;i<btNodeArray.length;i++){System.out.print(btNodeArray[i]+" ");}
         System.out.println();
         
     }
@@ -108,11 +106,11 @@ public class BSTsort {
         toarray(this.c,a,i);
     }
     private static void toarray(btNode t, int[] a, int i)
-    { 
+    {   
         if(t==null){return;}
         toarray(t.left, a, i);
         a[i++] = t.info; 
-        toarray(t.right, a, i);
+        toarray(t.right, a, i+1);
     }//End of toarray method
     
     
