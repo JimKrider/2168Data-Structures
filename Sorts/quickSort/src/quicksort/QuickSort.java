@@ -54,7 +54,8 @@ public class QuickSort {
             sum+=count[j];
             average = sum/rep;
     }
-        System.out.println("Size 2048  | Min = "+min+"  | Max = "+max + "  | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 2048  | Min = "+min+"  | Max = "+max 
+                + "  | Average "+ average+" | Time in milliseconds "+lapse);
         
       //System.out.print("Qcount--> "+qcount);System.out.println("|Part--> "+part);
     }    
@@ -83,7 +84,8 @@ public class QuickSort {
             sum+=count[j];
             average = sum/rep;
         }
-        System.out.println("Size 4096  | Min = "+min+"  | Max = "+max + "  | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 4096  | Min = "+min+"  | Max = "+max 
+                + "  | Average "+ average+" | Time in milliseconds "+lapse);
     }
     public static void quick8192(){
        // int rep = 10;
@@ -110,7 +112,8 @@ public class QuickSort {
             sum+=count[j];
             average = sum/rep;
         }
-        System.out.println("Size 8196  | Min = "+min+"  | Max = "+max + "  | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 8196  | Min = "+min+"  | Max = "+max 
+                + "  | Average "+ average+" | Time in milliseconds "+lapse);
     }
     public static void quick16384(){
        // int rep = 10;
@@ -137,7 +140,8 @@ public class QuickSort {
             sum+=count[j];
             average = sum/10;
         }   
-        System.out.println("Size 16384 | Min = "+min+" | Max = "+max + " | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 16384 | Min = "+min+" | Max = "+max 
+                + " | Average "+ average+" | Time in milliseconds "+lapse);
     }
     
     public static void quicksort(int a[], int l, int h){

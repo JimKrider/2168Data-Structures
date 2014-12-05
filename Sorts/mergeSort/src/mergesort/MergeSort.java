@@ -52,7 +52,8 @@ public class MergeSort {
             sum+=countm[j];
             average = sum/rep;
         }
-        System.out.println("Size 2048   | Min = "+min+"   | Max = "+max + "   | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 2048   | Min = "+min+"   | Max = "+max 
+                + "   | Average "+ average+" | Time in milliseconds "+lapse);
     /*
     System.out.print("Numcalls--> "+numcalls);
     System.out.println("| count--> "+count+"| m--> "+m);*/
@@ -81,7 +82,8 @@ public class MergeSort {
             sum+=countM[j];
             average = sum/rep;
         }
-        System.out.println("Size 4095   | Min = "+min+"   | Max = "+max + "   | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 4095   | Min = "+min+"   | Max = "+max 
+                + "   | Average "+ average+" | Time in milliseconds "+lapse);
     
     /*System.out.print("Numcalls--> "+numcalls);
     System.out.println("| count--> "+count+"| m--> "+m);*/
@@ -110,7 +112,8 @@ public class MergeSort {
             sum+=countm[j];
             average = sum/rep;
         }
-        System.out.println("Size 8192   | Min = "+min+"  | Max = "+max + "  | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 8192   | Min = "+min+"  | Max = "+max 
+                + "  | Average "+ average+" | Time in milliseconds "+lapse);
     /*System.out.print("Numcalls--> "+numcalls);
     System.out.println("| count--> "+count+"| m--> "+m);*/
    }
@@ -138,7 +141,8 @@ public class MergeSort {
             sum+=countm[j];
             average = sum/rep;
         }
-        System.out.println("Size 16384  | Min = "+min+"  | Max = "+max + "  | Average "+ average+" | Time in milliseconds "+lapse);
+        System.out.println("Size 16384  | Min = "+min+"  | Max = "+max 
+                + "  | Average "+ average+" | Time in milliseconds "+lapse);
     /*System.out.print("Numcalls--> "+numcalls);
     System.out.println("| count--> "+count+"| m--> "+m);*/
    }
