@@ -15,17 +15,17 @@ import java.util.Random;
 public class MergeSort {
    static int numcalls=0;
    static int count=0, m=0;
-   static int rep=1000;
-   static int array_size=1000;
+   static int rep=10;
+   static int array_size=10;
    static long lapse=0, begin, end;
     static int k=0;
    public static void main(String[] args)
    {
        int test =0;int test1=0;int test2=0;int test3 =0;
-      while(test<100){merge2048();test++;}
-      while(test1<100){merge4096();test1++;}
-      while(test2<100){merge8192();test2++;}
-      while(test3<100){merge16384();test3++;}
+      while(test<1){merge2048();test++;}
+      while(test1<1){merge4096();test1++;}
+      while(test2<1){merge8192();test2++;}
+      while(test3<1){merge16384();test3++;}
    }
    
    public static void merge2048(){

@@ -13,9 +13,9 @@ import java.util.Random;
  */
 public class QuickSort {
  static int qcount=0;
- static int rep= 1000;
+ static int rep= 10;
  static int part =0;
- static int array_size=1000;
+ static int array_size=10;
  static long lapse=0, begin, end;
  static int k=0;
     /**
@@ -23,10 +23,10 @@ public class QuickSort {
      */
     public static void main(String[] args) {
      int test =0;int test1=0;int test2=0; int test3 =0;
-     while(test<100){quick2048();test++;}
-     while(test1<100){quick4096();test1++;}
-     while(test2<100){quick8192();test2++;}
-     while(test3<100){quick16384();test3++;}
+     while(test<1){quick2048();test++;}
+     while(test1<1){quick4096();test1++;}
+     while(test2<1){quick8192();test2++;}
+     while(test3<1){quick16384();test3++;}
     }
     
     public static void quick2048(){
