@@ -15,6 +15,16 @@ ___
 
 Basic program using BST.
 
+____
+##Sorts
+
+Running the different sorting algorithms at high amounts to graph the data. 
+
+____
+##Trees
+
+Extra Credit Problems. 
+
 ***
 
 Each of the programs were given out in Professor Korsh's Data Structures class. I applied what was given and also added to each of the programs. More information on each program can be found in each Programs Read Me's.
