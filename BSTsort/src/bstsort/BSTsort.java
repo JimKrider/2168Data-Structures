@@ -113,7 +113,7 @@ public class BSTsort {
         return root;
     }
     
-    /*Returns the NUMBER OF NODES IN the TREE*/
+    /*Returns the NUMBER OF NODES IN the TREE, No real need for this */
     public int count()
     { 
         return countNode(this.c);   

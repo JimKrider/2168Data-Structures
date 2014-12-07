@@ -30,8 +30,6 @@ public class TreeClient {
          lapse=lapse+(end-begin);
          k++;
       }
-     
-
         System.out.println("The # of integers in BST is "+BST.get_howmany());
         System.out.println("Time in milliseconds "+lapse);
         System.out.println("Integers in The BST are "); BST.print();

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Trees;
-import java.io.*;
+
 /**
  *
  * @author Jim
@@ -45,14 +45,16 @@ public class BinaryTree {
     }
     
     private void largerThenOmit(btNode t,int i)
-    {   btNode p = c,predp=null;
+    {   btNode p = c, predp = null;
         if(t == null){return;}
-        if(t.info > i){howmany--; t = omit( p , t.info);}
-       largerThenOmit(t.left,i);
-       largerThenOmit(t.right,i);
-           
+        if(t.info >= i)
+        {
+            howmany--;
+            omit( p , t.info);
+        }
         
-      
+        largerThenOmit(t.left,i);
+        largerThenOmit(t.right,i);
     }
 
     public void insert(int i)
@@ -77,55 +79,37 @@ public class BinaryTree {
     }   
     private static btNode omit(btNode t, int i){
         if(t == null) return t;
-        if(t.info > i){t.left=omit(t.left,i);   }
+        if(t.info > i){t.left=omit(t.left, i);}
         else if(t.info < i){t.right=omit(t.right,i);}
         else if(t.left != null && t.right != null){
-            t.info = findMin(t.right).info;
+            t.info  = findMin(t.right).info;
             t.right = omit(t.right,t.info);
-        }else            
-            t = (t.left != null) ? t.left : t.right;
-        
+        }else{t = (t.left != null) ? t.left : t.right;}        
         return t;
     }
-    private static btNode findMin( btNode t )
-    {
-    if( t == null )
-      return null;
-    else if( t.left == null )
-      return t;
-    return findMin( t.left );
+    private static btNode findMin( btNode t ){
+        if( t == null ){return null;}else if( t.left == null ){return t;}
+        return findMin( t.left );
     }
-    private static btNode findMax( btNode t )
-    {
-    if( t != null )
-      while( t.right != null )
-        t = t.right;
-
-    return t;
+    private static btNode findMax( btNode t ){
+        if( t != null ){while( t.right != null ){t = t.right;}}
+        return t;
     }
     
     
     public int get_howmany() {return howmany;}//End of get_howmany   
-    
-   
-    public void print()
-    {
+    public void print(){
         printtree(c);
         System.out.println("Root-->"+c.info);
         if(c == null){System.out.println(c);}
     }//End of print    
-    
-    private static void printtree(btNode t)
-    {    
-      if(t != null)
-      {  
+    private static void printtree(btNode t){    
+      if(t != null){  
         printtree(t.left);
         System.out.println(t.info);
         printtree(t.right);
       } 
     }//End of Printtree method   
-    
-    
     
     private static class btNode
     {
