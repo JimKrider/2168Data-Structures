@@ -47,12 +47,10 @@ public class BinaryTree {
     private void largerThenOmit(btNode t,int i)
     {   btNode p = c, predp = null;
         if(t == null){return;}
-        if(t.info >= i)
-        {
+        if(t.info >= i){
             howmany--;
             omit( p , t.info);
         }
-        
         largerThenOmit(t.left,i);
         largerThenOmit(t.right,i);
     }
@@ -88,11 +86,17 @@ public class BinaryTree {
         return t;
     }
     private static btNode findMin( btNode t ){
-        if( t == null ){return null;}else if( t.left == null ){return t;}
+        if( t == null )
+            return null;
+        else if( t.left == null )
+            return t;
+        
         return findMin( t.left );
     }
     private static btNode findMax( btNode t ){
-        if( t != null ){while( t.right != null ){t = t.right;}}
+        if( t != null )
+            while( t.right != null )
+                t = t.right;
         return t;
     }
     
