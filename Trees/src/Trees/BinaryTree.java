@@ -41,18 +41,36 @@ public class BinaryTree {
 
     public void largerThenOmit(int i)
     {
-        largerThenOmit(c,i);
+        remove(c,i);
     }
     
-    private void largerThenOmit(btNode t,int i)
-    {   btNode p = c, predp = null;
-        if(t == null){return;}
-        if(t.info >= i){
-            howmany--;
-            omit( p , t.info);
+    private void remove(btNode t,int i)
+    {   btNode p = c;
+       // if(t == null){return;}
+        int count=0;
+        /* I can count the depth if it is the max depth then it is root.
+        If it is less then max it is not root
+        */
+        if((t.info == i)&&(t.left.info < i)&&(c.info != t.info)){
+            c.right = t.left;
+            c.right.info = t.left.info;
+           
+        }else if((t.info == i)&&(c.info == t.info)){
+            c = t.left;
+            c.info = t.left.info;
+            if(t.left.right!=null){
+                c.right = t.left.right;
+            }
+            System.out.println("test");
+        }else if((t.info!=i)&&(t.right.info>=i)){
+             t.right = null;
+        }else if(t.info > i){
+            remove(t.left,i);
+        }else if(t.info < i){
+            remove(t.right,i);
         }
-        largerThenOmit(t.left,i);
-        largerThenOmit(t.right,i);
+        
+        
     }
 
     public void insert(int i)
@@ -75,6 +93,8 @@ public class BinaryTree {
         else c = p;
       }
     }   
+    
+    /*Not Going to use this anymore*/
     private static btNode omit(btNode t, int i){
         if(t == null) return t;
         if(t.info > i){t.left=omit(t.left, i);}
