@@ -16,6 +16,11 @@ ___
 Basic program using BST.
 
 ____
+##Intcoll Assignments
+Includes Intcoll Assignments 1 - 6
+
+____
+
 ##Sorts
 
 Running the different sorting algorithms at high amounts to graph the data. 
